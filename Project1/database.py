@@ -1,5 +1,10 @@
+#This file is responsible for database connections and SQL statements to insert and fetch data from existing databse
+#File : database.py
+#Author: Nikhil Divekar
+
 import sqlite3
 
+#Creates table and inserts data from singup window into login.db
 def createTable():
     connection = sqlite3.connect("login.db")
     connection.execute("CREATE TABLE USERS (USERNAME TEXT NOT NULL, EMAIL TEXT, PASSWORD TEXT)")
