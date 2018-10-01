@@ -5,11 +5,16 @@
 # Created by: PyQt5 UI code generator 5.7
 #
 # WARNING! All changes made in this file will be lost!
+# This is .py file for the signup window
+# File: singup.py
+# Author: Nikhil Divekar
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3
 
 class Ui_Dialog1(object):
+    
+    # add new data to the database
     def insert_data(self):
         username = self.uname_le.text()
         email = self.email_le.text()
@@ -20,6 +25,7 @@ class Ui_Dialog1(object):
         connection.commit()
         connection.close()
         
+    # setup the main UI
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(404, 225)
@@ -53,6 +59,7 @@ class Ui_Dialog1(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
+    # makes changes to UI designwise
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Sign-up Window"))
