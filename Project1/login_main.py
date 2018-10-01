@@ -5,6 +5,9 @@
 # Created by: PyQt5 UI code generator 5.7
 #
 # WARNING! All changes made in this file will be lost!
+# This is .py file for the login window
+# File: login_main.py
+# This file starts up the application
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3
@@ -20,6 +23,7 @@ class Ui_Dialog(object):
         #msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
         #msgBox.exec_()
     
+    # This function checks the username and password and cross reference them with the database to verify whether username and pwd is correct
     def loginCheck(self):
         username = self.userlineedit.text()
         password = self.pwd_line_edit.text()
@@ -39,7 +43,8 @@ class Ui_Dialog(object):
             #self.showMsgBox('Warning','Invalid Username or passoword')
             
         connection.close()
-        
+    
+    # Warning message box for incorrect username or password
     def showMsgBox(self, title, message):
         msg = QtWidgets.QMessageBox()
         msg.setIcon(QtWidgets.QMessageBox.Warning)
@@ -47,14 +52,16 @@ class Ui_Dialog(object):
         msg.setText(message)
         msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msg.exec_()
-        
+    
+    # Opens the sign up window
     def signupCheck(self):
         print("Sign-up clicked")
         self.signupWindow = QtWidgets.QDialog()
         self.ui = Ui_Dialog1()
         self.ui.setupUi(self.signupWindow)
         self.signupWindow.show()
-        
+    
+    # This function is responsible for setting the main layout of the UI
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(519, 264)
@@ -113,6 +120,7 @@ class Ui_Dialog(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
+    # This function makes the changes in the code correspomding to changes made by user on designer
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Login Window"))
@@ -122,7 +130,7 @@ class Ui_Dialog(object):
         self.signupButton.setText(_translate("Dialog", "Sign Up"))
         self.label.setText(_translate("Dialog", "LOGIN WINDOW"))
 
-
+# main function
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
