@@ -5,6 +5,9 @@
 # Created by: PyQt5 UI code generator 5.7
 #
 # WARNING! All changes made in this file will be lost!
+# This is py file for the main window
+# File: final_working.py
+# Author: Nikhil Divekar
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QTimer, QTime
@@ -15,6 +18,8 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 class Ui_MainWindow(object):
+    
+    # Global variables
     readings = 0
     temp_avg = 0
     temp_avg1 = 0
@@ -30,6 +35,7 @@ class Ui_MainWindow(object):
     hum_min_val = 15
     hum_max_val = 50
     
+    # User can set the manual limit on the UI for temp and humidity
     def setLimit(self):
         if(len(self.temp_min.text()) > 0):
             self.temp_min_val = int(self.temp_min.text());
@@ -40,6 +46,7 @@ class Ui_MainWindow(object):
         if(len(self.hum_max.text()) > 0):
             self.hum_max_val = int(self.hum_max.text()); 
     
+    # Plots the temperature graph
     def plotGraph(self):
         fig = plt.figure()
         ax1 = fig.add_subplot(1,1,1)
@@ -50,6 +57,7 @@ class Ui_MainWindow(object):
         plt.show()
         print("Plot Graph")
         
+    # Plots the humidity graph    
     def hum_plotGraph(self):
         fig2 = plt.figure()
         ax2 = fig2.add_subplot(1,1,1)
@@ -60,6 +68,7 @@ class Ui_MainWindow(object):
         plt.show()
         print("Plot Graph")
         
+    # Function for the timer    
     def get_readings(self):
         self.readings = self.readings + 1
         print("Reached")
@@ -80,7 +89,8 @@ class Ui_MainWindow(object):
         timer.start(100)
         timer.setInterval(2000)
         timer.timeout.connect(self.timerEvent)
-        
+    
+    # This function is responsible for setup of the user layout
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(475, 406)
@@ -195,6 +205,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+    # This function is responsible for the changes made by user on designer
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Temperature and Humidity Measurement"))
@@ -214,7 +225,8 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "to"))
         self.label_4.setText(_translate("MainWindow", "Set Humidity Range:"))
         self.pushButton_2.setText(_translate("MainWindow", "SET"))
-        
+     
+    # The following temperature reads the temperature and humidity and also calculate their average
     def get_temp(self):
         _translate = QtCore.QCoreApplication.translate
         humidity, temperature = Adafruit_DHT.read(Adafruit_DHT.DHT22, 4)
@@ -277,7 +289,7 @@ class Ui_MainWindow(object):
         #self.readings = self.readings + 1
         #print("Readings: ", self.readings)
 
-
+# main function
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
