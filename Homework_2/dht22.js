@@ -1,3 +1,11 @@
+// This is the .js file for Homework 2 of Embeded Interface Design
+// This code outputs temperature and humidity readings recorded by DHT22 Sensor every 10 seconds
+// It also records lowest, highest and average of 10 temperature and humidity readings
+// Author	: Nikhil Divekar
+// File-name 	: dht22.js
+// node version : v8.12.0
+
+
 var rpiDHTSensor = require('rpi-dht-sensor');						// use rpi-dht-sensor libraries present in bcm2835 folder
  
 var temp_hum_sensor = new rpiDHTSensor.DHT22(4);					// get the values from GPIO 4 pin
