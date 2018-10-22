@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+  <head>
+    <title>WebSocket based Temperature-Humidity Meter</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+      
+      body {
+        text-align: center;
+        min-width: 500px;
+      }
+
+	
+    </style>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script>
+ 
+      // log function
+      log = function(data){
+        $("div#terminal").prepend("</br>" +data);
+        console.log(data);
+      };
+ 
+      $(document).ready(function () {
+        $("div#message_details").hide()
+ 	$("div#message_details1").hide();
+        var ws;
+	var msg;
+ 
+        $("#open").click(function(evt) {
+          evt.preventDefault();
+ 
+          var host = $("#host").val();
+          var port = $("#port").val();
+          var uri = $("#uri").val();
+	  var i  = 0;
+
+          // create websocket instance
+          ws = new WebSocket("ws://" + host + ":" + port + uri);
+           
+          // Handle incoming websocket message callback
+          ws.onmessage = function(evt) {
+		 
+            log("Message Received: " + evt.data);
+            //alert("message received: " + evt.data);
+		
+		if(msg == "temp_val")
+		{
+		$("#temp_val").css("background", "#f0b800");
+		if(document.getElementById("F").checked)
+		{
+			document.getElementById("temp_val").value= (9*evt.data/5)+32;
+		}
+		if(document.getElementById("C").checked)
+		{
+			document.getElementById("temp_val").value= evt.data;
+		}
+		}
+
+		else if(msg == "temp_max_val")
+		{
+		$("#temp_max").css("background", "#f0b800");
+		document.getElementById("temp_max").value= evt.data;
+		}
+		
+		else if(msg == "temp_min_val")
+		{
+		$("#temp_min").css("background", "#f0b800");
+		document.getElementById("temp_min").value= evt.data;
+		}
+
+		else if(msg == "temp_avg_val")
+		{
+		$("#temp_avg").css("background", "#f0b800");
+		document.getElementById("temp_avg").value= evt.data;
+		}
+
+		if(msg == "hum_val")
+		{
+		$("#hum_val").css("background", "#9797ff");
+		document.getElementById("hum_val").value= evt.data;
+		}
+
+		else if(msg == "hum_max_val")
+		{
+		$("#hum_max").css("background", "#9797ff");
+		document.getElementById("hum_max").value= evt.data;
+		}
+		
+		else if(msg == "hum_min_val")
+		{
+		$("#hum_min").css("background", "#9797ff");
+		document.getElementById("hum_min").value= evt.data;
+		}
+
+		else if(msg == "hum_avg_val")
+		{
+		$("#hum_avg").css("background", "#9797ff");
+		document.getElementById("hum_avg").value= evt.data;
+		}
+		
+            };
+ 
+          // Close Websocket callback
+          ws.onclose = function(evt) {
+            log("***Connection Closed***");
+            alert("Connection close");
+            $("#host").css("background", "#ff0000"); 
+            $("#port").css("background", "#ff0000"); 
+            $("#uri").css("background",  "#ff0000");
+            $("div#message_details").empty();
+ 
+            };
+ 
+          // Open Websocket callback
+          ws.onopen = function(evt) { 
+            $("#host").css("background", "#00ff00"); 
+            $("#port").css("background", "#00ff00"); 
+            $("#uri").css("background", "#00ff00");
+            $("div#message_details").show();
+	    $("div#message_details1").show();
+            log("***Connection Opened***");
+          };
+        });send
+ 
+        // Send websocket message function
+        $("#send").click(function(evt) {
+	    msg = "temp_val";
+            log("Sending Message:temp_val");
+            ws.send("temp_val");
+        });
+
+	$("#send_temp_max").click(function(evt) {
+	    msg = "temp_max_val"
+            log("Sending Message:temp_max_val");
+            ws.send(msg);
+        });
+ 
+	$("#send_temp_min").click(function(evt) {
+	    msg = "temp_min_val"
+            log("Sending Message:temp_min_val");
+            ws.send(msg);
+        });
+
+	$("#send_temp_avg").click(function(evt) {
+	    msg = "temp_avg_val"
+            log("Sending Message:temp_avg_val");
+            ws.send(msg);
+        });
+
+	$("#send_hum").click(function(evt) {
+	    msg = "hum_val";
+            log("Sending Message:hum_val");
+            ws.send("hum_val");
+        });
+
+	$("#send_hum_max").click(function(evt) {
+	    msg = "hum_max_val"
+            log("Sending Message:hum_max_val");
+            ws.send(msg);
+        });
+ 
+	$("#send_hum_min").click(function(evt) {
+	    msg = "hum_min_val"
+            log("Sending Message:hum_min_val");
+            ws.send(msg);
+        });
+
+	$("#send_hum_avg").click(function(evt) {
+	    msg = "hum_avg_val"
+            log("Sending Message:hum_avg_val");
+            ws.send(msg);
+        });
+
+      });
+    </script>
+  </head>
+ 
+  <body>
+    <h1>WebSocket based Temperature-Humidity Meter</h1>
+    <div id="connection_details" >
+      <label for="host">host:</label>
+      <input type="text" id="host" value="localhost" style="background:#ff0000;"/><br />
+      <label for="port">port:</label>
+      <input type="text" id="port" value="8888" style="background:#ff0000;"/><br />
+      <label for="uri">uri:</label>
+      <input type="text" id="uri" value="/ws" style="background:#ff0000;"/><br />
+      <input type="submit" id="open" value="open" />
+    </div>
+    <div id="message_details">
+        </br>
+	<input type="submit" id="send" value="Current Temp." />
+	<label for="temp_val">Temperature:</label>
+        <input type="text" id="temp_val" value=""/> 
+	
+	<input type="radio" name="unit" id="C"
+	value="cel" checked> *C
+	<input type="radio" name="unit" id="F"
+	value="fah"> F <br />
+	</br>
+	<input type="submit" id="send_temp_max" value="Max. Temp." />
+	<label for="temp_max">Max. Temp.:</label>
+	<input type="text" id="temp_max" value=""/><br />
+	</br>
+	<input type="submit" id="send_temp_min" value="Min. Temp." />
+	<label for="temp_min">Min. Temp.:</label>
+	<input type="text" id="temp_min" value=""/><br />
+	</br>
+	<input type="submit" id="send_temp_avg" value="Avg. Temp." />
+	<label for="temp_avg">Avg. Temp.:</label>
+	<input type="text" id="temp_avg" value=""/><br />
+
+    </div>
+    <div id="message_details1">
+	</br>
+	<input type="submit" id="send_hum" value="Current Hum." />
+	<label for="hum_val">Humidity:</label>
+        <input type="text" id="hum_val" value=""/><br />
+	</br>
+	<input type="submit" id="send_hum_max" value="Max. Hum." />
+	<label for="hum_max">Max. Hum.:</label>
+	<input type="text" id="hum_max" value=""/><br />
+	</br>
+	<input type="submit" id="send_hum_min" value="Min. Hum." />
+	<label for="hum_min">Min. Hum.:</label>
+	<input type="text" id="hum_min" value=""/><br />
+	</br>
+	<input type="submit" id="send_hum_avg" value="Avg. Hum." />
+	<label for="hum_avg">Avg. Hum.:</label>
+	<input type="text" id="hum_avg" value=""/><br />
+    </div>
+    <div id="terminal">
+        
+    </div>
+  </body>
+</html>
