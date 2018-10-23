@@ -87,6 +87,7 @@ class Ui_MainWindow(object):
         self.get_temp()
         self.db_func()
         
+    # Adding values to database
     def db_func(self):
         #temp_value = self.temp_edit.text()
         
@@ -99,6 +100,7 @@ class Ui_MainWindow(object):
         connection.commit()
         connection.close()
         
+    # Fetch values from database
     def get_value_from_db(self):
         connection = sqlite3.connect("user.db")
         result = connection.execute("SELECT * FROM DATA")
