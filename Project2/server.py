@@ -15,6 +15,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     def open(self):
         print("new connection")
       
+    #When message is received
     def on_message(self, message):
         print("message received:" + message)
         # Reverse Message and send it back
