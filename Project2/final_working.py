@@ -158,6 +158,7 @@ class Ui_MainWindow(object):
         self.graph_but = QtWidgets.QPushButton(self.centralwidget)
         self.graph_but.setGeometry(QtCore.QRect(10, 200, 181, 31))
         self.graph_but.setObjectName("graph_but")
+        self.graph_but.clicked.connect(self.plotGraph)
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
         self.label_7.setGeometry(QtCore.QRect(80, 160, 67, 21))
         self.label_7.setObjectName("label_7")
@@ -176,6 +177,7 @@ class Ui_MainWindow(object):
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(250, 200, 161, 31))
         self.pushButton.setObjectName("pushButton")
+        self.pushButton.clicked.connect(self.hum_plotGraph)
         self.checkBox = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox.setGeometry(QtCore.QRect(10, 240, 99, 26))
         self.checkBox.setObjectName("checkBox")
@@ -445,4 +447,6 @@ if __name__ == "__main__":
     #connection = sqlite3.connect("user.db")
     #connection.execute("CREATE TABLE DATA(TEMP_VALUE FLOAT, HUM_VALUE FLOAT, TIME_DATE_VALUE TEXT NOT NULL)")
     sys.exit(app.exec_())
+
+
 

@@ -12,8 +12,10 @@
 
 	
     </style>
-    <script src="http://code.jquery.com/jquery.min.js"></script>
-    <script>
+   
+ <script src="http://code.jquery.com/jquery.min.js"></script>
+    
+<script>
  
       // log function
       log = function(data){
@@ -183,10 +185,15 @@
       <input type="text" id="host" value="localhost" style="background:#ff0000;"/><br />
       <label for="port">port:</label>
       <input type="text" id="port" value="8888" style="background:#ff0000;"/><br />
-      <label for="uri">uri:</label>
+      <label for="uri">uri  : </label>
       <input type="text" id="uri" value="/ws" style="background:#ff0000;"/><br />
-      <input type="submit" id="open" value="open" />
+  <br/>    <input type="submit" id="open" value="open" />
     </div>
+
+	<div class="tabs">
+  <ul id="tabs-nav">
+    <li><a href="#tab1">Project Members</a></li>
+  </ul> <!-- END tabs-nav -->
     <div id="message_details">
         </br>
 	<input type="submit" id="send" value="Current Temp." />
@@ -232,5 +239,18 @@
     <div id="terminal">
         
     </div>
+
+	
+    <div id="tab1" class="tab-content">
+      <h2>Nikhil Divekar and Anay Gondhalekar</h2>
+      <p>This is EID project 2</p>
+	<p>Raspberry Pi 3b Platform</p>
+	<p>Languages used: Python, HTML, Javascript</p>
+	<p>Database used: SQL DB</p>
+	<p>Refreshes the readings on QT interface and database evry 5 seconds</p>
+	<p>5 extra credits done as follows:</p>
+	<p>Login, Fetch Data, Print, Tab, Graph plot</p>
+    </div>
+
   </body>
 </html>

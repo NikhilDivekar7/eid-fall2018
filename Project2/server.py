@@ -64,12 +64,17 @@ class WSHandler(tornado.websocket.WebSocketHandler):
             self.write_message(str(reading[0])[:5]) 
         
         elif(message == "hum_min_val"):
-            curs.execute("SELECT * FROM DATA WHERE HUM_VALUE =(SELECT MIN(HUM_VALUE) FROM DATA)")
+            curs.execute("SELECT * FROM DATA WHERE HUM_VALUE =(SELECT MIN(HUM_VALUE) FROM DATA) ")
             for reading in curs.fetchall():
                 print(str(reading[0]) + " " + str(reading[1]) + " " + str(reading[2]))
             self.write_message(str(reading[1])[:5])
        
-            
+        else:
+            print(message)
+            curs.execute("SELECT DISTINCT TEMP_VALUE FROM DATA WHERE TIME_DATE_VALUE = ?", [message])
+            for reading in curs.fetchall():
+                print(str(reading[0]))
+            self.write_message(str(reading[0])[:5])
     def on_close(self):
         print("connection closed")
  
@@ -85,6 +90,6 @@ if __name__ == "__main__":
     http_server = tornado.httpserver.HTTPServer(application)
     http_server.listen(8888)
     myIP = socket.gethostbyname(socket.gethostname())
-    print("*** Websocket Server Started at %s***", myIP)
+    print("*** Websocket Server Started ***")
     tornado.ioloop.IOLoop.instance().start()
  
