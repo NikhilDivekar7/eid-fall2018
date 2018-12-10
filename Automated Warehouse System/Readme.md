@@ -3,13 +3,13 @@
 
 ## Repository for the Super project -'Automated Warehouse System using Robotic Arm and AWS with Image Processing' 
 ## For the course EID (ECEN 5053-002) at University of Colorado Boulder
-## By- Anay Gondhalekar, Nikhil Divekar, Shubham Jaiswal
+## By- Nikhil Divekar, Anay Gondhalekar, Shubham Jaiswal
 
 ### Names of Developers and Students-
 
 This project is a result of the efforts of-
-#### Anay Gondhalekar - MQTT, Client Side Code, Configuring Robotic Arm,Lambda Function, HTML page, Extra credit
 #### Nikhil Divekar - UI on Client Side, Precise Pick-n-Place of Robotic Arm, Image Processing(AWS Rekognition), SQS, Extra credit
+#### Anay Gondhalekar - MQTT, Client Side Code, Configuring Robotic Arm,Lambda Function, HTML page, Extra credit
 #### Shubham Jaiswal - Robotic Arm Assembly,Lambda Function, UI on Client Side, Server Code, Websockets, Extra credit
 
 #### Project Information-
